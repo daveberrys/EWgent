@@ -5,8 +5,19 @@ from pyder import *
 
 class API:
     def __init__(self):
-        self.window = wv.active_window()
         self.appID = f"{pyder_domainSystem}.{pyder_projectID}"
+        self._maximized = False
+        self._saved_geometry = None
+
+    def getWindow(self):
+        activeWindow = wv.active_window()
+
+        if activeWindow:
+            return activeWindow
+        elif len(wv.windows) > 0:
+            return wv.windows[0]
+        else:
+            return None
     
     def getConfigPath(self):
         if sys.platform == "win32":
@@ -18,3 +29,44 @@ class API:
         else:
             configPath = os.path.join(os.getenv("HOME"), ".config", self.appID)
         return configPath
+
+
+    # system stuff
+    def exitApp(self):
+        currentWindow = self.getWindow()
+
+        if currentWindow == None:
+            print("Window was null. App could not exit.")
+            return None
+        else:
+            currentWindow.destroy()
+            exit()
+    def maximizeApp(self):
+        currentWindow = self.getWindow()
+
+        if currentWindow == None:
+            print("Window was null. App could not maximize.")
+            return None
+
+        def unmaximize(window):
+            native = getattr(window, 'native', None)
+            unmaximize = getattr(native, 'unmaximize', None)
+            if callable(unmaximize):
+                unmaximize()
+
+        if self._maximized:
+            unmaximize(currentWindow)
+            self._maximized = False
+        else:
+            currentWindow.maximize()
+            self._maximized = True
+        return True
+    def minimizeApp(self):
+        currentWindow = self.getWindow()
+
+        if currentWindow == None:
+            print("Window was null. App could not minimize.")
+            return None
+        else:
+            currentWindow.minimize()
+            return True

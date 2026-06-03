@@ -39,7 +39,10 @@ def startWindow(dev=False):
         js_api=API(),
         width=pyder_window_initSize_v1,
         height=pyder_window_initSize_v2,
-        min_size=(pyder_window_minSize_v1, pyder_window_minSize_v2)
+        min_size=(pyder_window_minSize_v1, pyder_window_minSize_v2),
+        resizable=True,
+        frameless=True,
+        easy_drag=False,
     )
 
     wv.start(
