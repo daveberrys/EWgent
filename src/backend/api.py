@@ -4,6 +4,8 @@ import os
 from pyder import *
 import json
 
+from src.backend.utils.json import getAllFileNames, getFileContent, saveFileContent, deleteFileEntry
+
 class API:
     def __init__(self):
         self.appID = f"{pyder_domainSystem}.{pyder_projectID}"
@@ -30,16 +32,6 @@ class API:
         else:
             configPath = os.path.join(os.getenv("HOME"), ".config", self.appID)
         return configPath
-
-    def appInit(self):
-        configPath = self.getConfigPath()
-        configFile = os.path.join(configPath, "config.json")
-        if not os.path.exists(configPath):
-            os.makedirs(configPath)
-        if not os.path.exists(configFile):
-            with open(configFile, 'w') as f:
-                json.dump({}, f)
-        return
 
     # system stuff
     def exitApp(self):
@@ -80,3 +72,26 @@ class API:
         else:
             currentWindow.minimize()
             return True
+
+    # file management
+    def getDataPath(self):
+        return os.path.join(self.getConfigPath(), "data.json")
+    def appInit(self):
+        configPath = self.getConfigPath()
+        configFile = os.path.join(configPath, "config.json")
+        if not os.path.exists(configPath):
+            os.makedirs(configPath)
+        if not os.path.exists(configFile):
+            with open(configFile, "w") as f:
+                json.dump({}, f)
+        return
+    def getFiles(self):
+        return getAllFileNames(self.getDataPath())
+    def getFileContent(self, fileName):
+        return getFileContent(self.getDataPath(), fileName)
+    def saveFile(self, fileName, content):
+        saveFileContent(self.getDataPath(), fileName, content)
+        return True
+    def deleteFile(self, fileName):
+        deleteFileEntry(self.getDataPath(), fileName)
+        return True

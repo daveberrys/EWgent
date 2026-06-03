@@ -1,13 +1,37 @@
 <script lang="ts">
-    import Topbar from './components/Topbar.svelte';
-    import Sidebar from './components/Sidebar.svelte';
-    import Textarea from './components/Textarea.svelte';
+    import Topbar from "./components/Topbar.svelte";
+    import Sidebar from "./components/Sidebar.svelte";
+    import Textarea from "./components/Textarea.svelte";
+
+    let selectedFile: string | null = $state(null);
+
+    function handleSelect(name: string) {
+        selectedFile = name;
+    }
 </script>
 
-<main style="display: flex; flex-direction: row; flex: 1; height: 100%;">
-    <Sidebar />
-    <div style="display: flex; flex-direction: column; flex: 1;">
-        <div style="width: auto;"><Topbar /></div>
-        <Textarea />
+<main>
+    <Sidebar onSelect={handleSelect} />
+    <div class="content">
+        <div class="topbar"><Topbar /></div>
+        <Textarea fileName={selectedFile} />
     </div>
 </main>
+
+<style>
+    main {
+        display: flex;
+        flex: 1;
+        height: 100%;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .topbar {
+        width: auto;
+    }
+</style>
