@@ -3,7 +3,7 @@ let apiPromise: Promise<any> | null = null;
 export function getPyAPI(): Promise<any> {
   if (!apiPromise) {
     apiPromise = new Promise((resolve) => {
-      if (window.pywebview?.api) {
+      if (window.pywebview?.api && Object.keys(window.pywebview.api).length > 0) {
         resolve(window.pywebview.api);
         return;
       }

@@ -78,7 +78,7 @@ class API:
         return os.path.join(self.getConfigPath(), "data.json")
     def appInit(self):
         configPath = self.getConfigPath()
-        configFile = os.path.join(configPath, "config.json")
+        configFile = os.path.join(configPath, "data.json")
         if not os.path.exists(configPath):
             os.makedirs(configPath)
         if not os.path.exists(configFile):
