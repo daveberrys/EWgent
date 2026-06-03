@@ -18,14 +18,27 @@
 </script>
 
 <main>
-    <button class="other" on:click={() => minimize()}>{minimizeSymbol}</button>
-    <button class="other" on:click={() => maximize()}>{maximizeSymbol}</button>
-    <button class="exit" on:click={() => exit()}>{exitSymbol}</button>
+    <div class="titlebar pywebview-drag-region">
+        EWgent - Epic Writing Agent
+    </div>
+    <div class="buttons">
+        <button class="other" on:click={() => minimize()}>{minimizeSymbol}</button>
+        <button class="other" on:click={() => maximize()}>{maximizeSymbol}</button>
+        <button class="exit" on:click={() => exit()}>{exitSymbol}</button>
+    </div>
 </main>
 
 <style>
     main {
         display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .titlebar {
+            flex: 1;
+            text-align: left;
+        }
         
         button {
             background: none;

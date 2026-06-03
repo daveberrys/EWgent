@@ -2,6 +2,7 @@ import webview as wv
 import sys
 import os
 from pyder import *
+import json
 
 class API:
     def __init__(self):
@@ -30,6 +31,15 @@ class API:
             configPath = os.path.join(os.getenv("HOME"), ".config", self.appID)
         return configPath
 
+    def appInit(self):
+        configPath = self.getConfigPath()
+        configFile = os.path.join(configPath, "config.json")
+        if not os.path.exists(configPath):
+            os.makedirs(configPath)
+        if not os.path.exists(configFile):
+            with open(configFile, 'w') as f:
+                json.dump({}, f)
+        return
 
     # system stuff
     def exitApp(self):

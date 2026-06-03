@@ -7,7 +7,7 @@
 <main style="display: flex; flex-direction: row; flex: 1; height: 100%;">
     <Sidebar />
     <div style="display: flex; flex-direction: column; flex: 1;">
-        <div style="width: auto; margin-left: auto;"><Topbar /></div>
+        <div style="width: auto;"><Topbar /></div>
         <Textarea />
     </div>
 </main>
