@@ -95,3 +95,21 @@ class API:
     def deleteFile(self, fileName):
         deleteFileEntry(self.getDataPath(), fileName)
         return True
+    def copyToClipboard(self, text):
+        import subprocess, sys, os
+        try:
+            #sonion i'm crine
+            if sys.platform == "darwin":
+                p = subprocess.Popen(["pbcopy"], stdin=subprocess.PIPE)
+            elif sys.platform == "win32":
+                p = subprocess.Popen(["clip"], stdin=subprocess.PIPE, shell=True)
+            elif os.system("which xclip > /dev/null 2>&1") == 0:
+                p = subprocess.Popen(["xclip", "-selection", "clipboard"], stdin=subprocess.PIPE)
+            elif os.system("which wl-copy > /dev/null 2>&1") == 0:
+                p = subprocess.Popen(["wl-copy"], stdin=subprocess.PIPE)
+            else:
+                return False
+            p.communicate(input=text.encode("utf-8"))
+            return True
+        except Exception:
+            return False

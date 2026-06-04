@@ -6,8 +6,8 @@ _pyder_project = [
         "packageManager": "pnpm",
         "version": "0.1.0",
         "window": {
-            "minSize": [800, 600],
-            "initSize": [800, 600]
+            "minSize": [1000, 600],
+            "initSize": [1000, 600]
         }
     }
 ]
