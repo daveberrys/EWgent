@@ -1,5 +1,6 @@
 # EWgent (Epic Writing Agent)
 EWgent is a tool to write a prompt before you send it to your preferred LLM.
+![Preview](readme/preview.png)
 
 ## Why does it exist?
 I have an issue.

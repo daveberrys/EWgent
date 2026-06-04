@@ -4,7 +4,7 @@ import os
 from pyder import *
 import json
 
-from src.backend.utils.json import getAllFileNames, getFileContent, saveFileContent, deleteFileEntry
+from src.backend.utils.json import getAllFileNames, getFileContent, saveFileContent, deleteFileEntry, renameFileEntry
 
 class API:
     def __init__(self):
@@ -33,7 +33,6 @@ class API:
             configPath = os.path.join(os.getenv("HOME"), ".config", self.appID)
         return configPath
 
-    # system stuff
     def exitApp(self):
         currentWindow = self.getWindow()
 
@@ -73,7 +72,6 @@ class API:
             currentWindow.minimize()
             return True
 
-    # file management
     def getDataPath(self):
         return os.path.join(self.getConfigPath(), "data.json")
     def appInit(self):
@@ -92,13 +90,14 @@ class API:
     def saveFile(self, fileName, content):
         saveFileContent(self.getDataPath(), fileName, content)
         return True
+    def renameFile(self, oldName, newName):
+        return renameFileEntry(self.getDataPath(), oldName, newName)
     def deleteFile(self, fileName):
         deleteFileEntry(self.getDataPath(), fileName)
         return True
     def copyToClipboard(self, text):
         import subprocess, sys, os
         try:
-            #sonion i'm crine
             if sys.platform == "darwin":
                 p = subprocess.Popen(["pbcopy"], stdin=subprocess.PIPE)
             elif sys.platform == "win32":

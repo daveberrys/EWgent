@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 def readJSON(file):
     if not os.path.exists(file):
@@ -14,7 +15,13 @@ def writeJSON(file, data):
 
 def getAllFileNames(file):
     data = readJSON(file)
-    return list(data.get("files", {}).keys())
+    files = data.get("files", {})
+    sortedFiles = sorted(
+        files.items(), 
+        key=lambda x: x[1].get("created", 0), 
+        reverse=True
+    )
+    return [name for name, _ in sortedFiles]
 
 def getFileContent(file, fileName):
     data = readJSON(file)
@@ -24,8 +31,24 @@ def saveFileContent(file, fileName, content):
     data = readJSON(file)
     if "files" not in data:
         data["files"] = {}
-    data["files"][fileName] = {"content": content}
+    
+    if fileName not in data["files"]:
+        data["files"][fileName] = {
+            "content": content,
+            "created": time.time()
+        }
+    else:
+        data["files"][fileName]["content"] = content
+        
     writeJSON(file, data)
+
+def renameFileEntry(file, oldName, newName):
+    data = readJSON(file)
+    if oldName in data.get("files", {}) and newName not in data["files"]:
+        data["files"][newName] = data["files"].pop(oldName)
+        writeJSON(file, data)
+        return True
+    return False
 
 def deleteFileEntry(file, fileName):
     data = readJSON(file)

@@ -1,34 +1,87 @@
 :root {
-    --background: rgba(31, 31, 31, 1);
-    --card: rgba(52, 52, 52, 1);
-    --text: rgba(255, 255, 255, 1);
-    --file: rgba(100, 100, 100, 1);
+    /* Base Colors */
+    --bg-primary: #0d1117;
+    --bg-secondary: #010409;
+    --bg-tertiary: #161b22;
+    
+    /* Text Colors */
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --text-muted: #484f58;
+    
+    /* Accent Colors */
+    --accent-primary: #58a6ff;
+    --accent-secondary: #1f6feb;
+    --danger: #f85149;
+    --success: #3fb950;
+    
+    /* Borders and Dividers */
+    --border-primary: #30363d;
+    --border-secondary: #21262d;
+    
+    /* Interaction */
+    --hover-overlay: rgba(255, 255, 255, 0.05);
+    --active-overlay: rgba(255, 255, 255, 0.1);
 
-    --exit: rgba(163, 0, 0, 1);
-    --misc: rgba(52, 52, 52, 1);
+    --font-mono: 'JetBrains Mono', monospace;
 }
 
-body, html {
+html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
-    background-color: var(--background);
-    color: var(--text);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
 }
 
 #app {
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 * {
+    box-sizing: border-box;
     scrollbar-width: thin;
-    scrollbar-color: var(--card) var(--background);
-    font-family: 'JetBrainsMono', monospace;
+    scrollbar-color: var(--border-primary) transparent;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+
+        &-track {
+            background: transparent;
+        }
+
+        &-thumb {
+            background: var(--border-primary);
+            border-radius: 4px;
+
+            &:hover {
+                background: var(--text-muted);
+            }
+        }
+    }
 }
 
 @font-face {
-    font-family: 'JetBrainsMono';
-    src: url('../public/JetBrainsMono-Regular.ttf');
+    font-family: 'JetBrains Mono';
+    src: url('../public/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    color: inherit;
+    transition: all 0.2s ease;
+}
+
+input, textarea {
+    font-family: inherit;
 }
