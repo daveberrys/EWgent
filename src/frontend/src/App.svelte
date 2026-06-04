@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Topbar from "./components/Topbar.svelte";
     import Sidebar from "./components/Sidebar.svelte";
     import Textarea from "./components/Textarea.svelte";
     import { getPyAPI } from "./utils/pywebview";
@@ -27,7 +26,6 @@
 <main>
     <Sidebar onSelect={handleSelect} onDelete={handleDelete} />
     <div class="content">
-        <div class="topbar"><Topbar /></div>
         <Textarea fileName={selectedFile} />
     </div>
 </main>
@@ -43,9 +41,5 @@
         display: flex;
         flex-direction: column;
         flex: 1;
-    }
-
-    .topbar {
-        width: auto;
     }
 </style>
