@@ -95,6 +95,16 @@ class API:
     def deleteFile(self, fileName):
         deleteFileEntry(self.getDataPath(), fileName)
         return True
+    
+    def fetchUrl(self, url):
+        import urllib.request
+        try:
+            with urllib.request.urlopen(url) as response:
+                return response.read().decode('utf-8')
+        except Exception as e:
+            print(f"Error fetching URL: {e}")
+            return None
+
     def copyToClipboard(self, text):
         import subprocess, sys, os
         try:
