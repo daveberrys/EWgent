@@ -1,8 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { getPyAPI } from "../utils/pywebview";
-    import Modal from "./popups/Modal.svelte";
-    import SectionFly from "./utils/SectionFly.svelte";
+    import Modal from "./utils/Modal.svelte";
 
     let { onSelect, onDelete }: { onSelect?: (name: string) => void, onDelete?: (name: string) => void } = $props();
 
@@ -168,6 +167,7 @@
     <div class="resizer" onmousedown={startResizing}></div>
 </aside>
 
+<!-- Modal Popups -->
 <Modal 
     show={showCreateModal} 
     title="Create New File" 
@@ -205,6 +205,7 @@
     <p>Are you sure you want to permanently delete <strong>{deleteTarget}</strong>?</p>
     <p class="warning">This action cannot be undone.</p>
 </Modal>
+<!-- End of modal popups -->
 
 <style>
     aside {
