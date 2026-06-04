@@ -40,7 +40,7 @@
     {#each files as file}
         <div class="filesButton">
             <button class="open" onclick={() => selectFile(file)}>
-                <span>{file}</span>
+                <span class="fileName">{file}</span>
             </button>
             <button class="delete" onclick={() => deleteFile(file)}>
                 <b>x</b>
@@ -62,6 +62,7 @@
         max-width: 400px;
         padding: 10px;
         gap: 5px;
+        overflow-y: auto;
     }
 
     button {
@@ -72,10 +73,20 @@
         transition: all 0.1s ease-out;
         border-radius: 5px;
         text-align: left;
-    }
 
-    button:hover {
-        filter: brightness(120%);
+        .fileName {
+            display: block;
+            overflow-wrap: break-word;
+            word-break: break-all;
+        }
+        
+        &:hover {
+            filter: brightness(120%);
+        }
+
+        &.delete:hover {
+            background-color: var(--exit);
+        }
     }
 
     .filesButton {
@@ -87,10 +98,6 @@
 
     .open {
         flex: 1;
-    }
-
-    .delete:hover {
-        background-color: var(--exit);
     }
 
     .add {
