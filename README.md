@@ -23,6 +23,11 @@ As of right now, there's no pre-built binary. Although, I do plan to make a work
 - Navigate back two times by doing `cd ../..` (or `cd ..\..` in windows) and run `venv/bin/python run.py compile` (or `venv\Scripts\python run.py compile` in windows) to compile the app into a executable file.
   - Once done, open the `dist` folder and run the executable file.
 
+## Why is the size when compiled so big?!
+Because of pyqt, it will be massive. Why did I choose qt for the window? For some reason, my NVIDIA gpu wouldn't render GTK. So I forcefully had to go to QT so I can develop this damn app.
+> [!NOTE]
+> I just tried GTK when writing this. Dear god it's 350mb. We're keeping QT.
+
 ## This project uses: Pyder
 Uses Python for the backend, Vite for the frontend. A link to Pyder is over here https://github.com/PinpointTools/Pyder
 
