@@ -52,9 +52,9 @@ class API:
 
         def unmaximize(window):
             native = getattr(window, 'native', None)
-            unmaximize = getattr(native, 'unmaximize', None)
-            if callable(unmaximize):
-                unmaximize()
+            _unmaximize = getattr(native, 'unmaximize', None)
+            if callable(_unmaximize):
+                _unmaximize()
 
         if self._maximized:
             unmaximize(currentWindow)
