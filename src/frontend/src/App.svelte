@@ -16,10 +16,16 @@
     function handleSelect(name: string) {
         selectedFile = name;
     }
+
+    function handleDelete(name: string) {
+        if (selectedFile === name) {
+            selectedFile = null;
+        }
+    }
 </script>
 
 <main>
-    <Sidebar onSelect={handleSelect} />
+    <Sidebar onSelect={handleSelect} onDelete={handleDelete} />
     <div class="content">
         <div class="topbar"><Topbar /></div>
         <Textarea fileName={selectedFile} />

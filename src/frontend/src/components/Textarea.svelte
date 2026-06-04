@@ -22,7 +22,7 @@
             if (fileName) {
                 await pyAPI.saveFile(fileName, content);
             }
-        }, 500);
+        }, 100);
     }
 
     $effect(() => {

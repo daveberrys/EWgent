@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { getPyAPI } from "../utils/pywebview";
 
-    let { onSelect }: { onSelect?: (name: string) => void } = $props();
+    let { onSelect, onDelete }: { onSelect?: (name: string) => void, onDelete?: (name: string) => void } = $props();
 
     let pyAPI: any = $state(null);
     let files: string[] = $state([]);
@@ -29,6 +29,7 @@
             `Are you sure you want to permanently delete "${file}"?`,
         );
         if (confirmed) {
+            onDelete?.(file);
             await pyAPI.deleteFile(file);
             files = await pyAPI.getFiles();
         }
