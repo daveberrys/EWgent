@@ -2,6 +2,8 @@
     import { onMount } from "svelte";
     import { getPyAPI } from "../utils/pywebview";
     import Modal from "./utils/Modal.svelte";
+    import { fly } from 'svelte/transition';
+    import { cubicOut } from 'svelte/easing';
 
     let { onSelect, onDelete }: { onSelect?: (name: string) => void, onDelete?: (name: string) => void } = $props();
 
@@ -112,6 +114,10 @@
             showDeleteModal = false;
         }
     }
+
+    function increment(index: number) {
+        return 250 * index;
+    }
 </script>
 
 <aside style="width: {sidebarWidth}px">
@@ -135,7 +141,7 @@
     </div>
     
     <div class="fileList">
-        {#each filteredFiles as file}
+        {#each filteredFiles as file, index}
             <div 
                 class="fileItem" 
                 class:active={selectedFile === file}
@@ -143,6 +149,7 @@
                 role="button"
                 tabindex="0"
                 onkeydown={(e) => e.key === 'Enter' && selectFile(file)}
+                in:fly={{ y: 20, duration: increment(index+1), easing: cubicOut, opacity: 0 }}
             >
                 <svg class="fileIcon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
                 <span class="fileName">{file}</span>
@@ -357,6 +364,12 @@
                     .editBtn:hover { background-color: var(--accent-primary); }
                     .deleteBtn:hover { background-color: var(--danger); }
                 }
+            }
+
+            .emptyState {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     }

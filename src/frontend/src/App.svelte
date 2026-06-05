@@ -40,17 +40,6 @@
         width: 100vw;
         background-color: var(--bg-primary);
 
-        .appHeader {
-            height: 48px;
-            background-color: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-primary);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 16px;
-            -webkit-app-region: drag;
-        }
-
         main {
             display: flex;
             flex: 1;
